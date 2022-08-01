@@ -18,7 +18,7 @@ public class TechJobsTest {
     private static ByteArrayOutputStream baos;
 
     // set up an alternative output stream to capture output
-    // this needs to be done before every test so we don't contaminate test output
+    // this needs to be done before every test, so we don't contaminate test output
     @Before
     public void setUpOutputStream() {
         baos = new ByteArrayOutputStream();
@@ -26,8 +26,7 @@ public class TechJobsTest {
     }
 
     private static String runProgramWithInput(String input) {
-        Scanner in = new Scanner(input);
-        TechJobs.in = in;
+        TechJobs.in = new Scanner(input);
         TechJobs.main(null);
         return baos.toString();
     }
@@ -50,6 +49,10 @@ public class TechJobsTest {
         String input = "0\n2\nChicago\nx";
         String output = runProgramWithInput(input);
         String expected = getFileContents("src/test/resources/testPrintJobsNoResults.txt");
+        System.out.println("-- EXPECTED --");
+        System.out.println(expected);
+        System.out.println("-- ACTUAL --");
+        System.out.println(output);
         assertEquals(expected, output);
     }
 
@@ -68,6 +71,5 @@ public class TechJobsTest {
         String expected = getFileContents("src/test/resources/testCaseInsensitiveSearch.txt");
         assertEquals(expected, output);
     }
-
 
 }
